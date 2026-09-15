@@ -8,12 +8,8 @@ Chrome extension hiển thị **transcript song ngữ Anh-Việt** ngay trong pa
 - Highlight tự động theo lời giảng — nói tới đâu, cả 2 dòng Anh/Việt sáng lên tới đó.
 - Không phá vỡ transcript gốc: giữ nguyên khung, nút timestamp, tìm kiếm, autoscroll... của Coursera; click vào câu (Anh hoặc Việt) vẫn seek video như bình thường.
 - Tự động kích hoạt trên mọi bài giảng có transcript, không cần bật/tắt thủ công.
-- Dịch bằng **Gemini API** (Google AI Studio) — có gói **miễn phí**. Kết quả dịch được cache theo từng bài giảng để không dịch lại nhiều lần.
-- API key được lưu cục bộ trong trình duyệt (`chrome.storage.local`), không hề hardcode trong code hay gửi đi đâu khác.
 
 ## Cài đặt (Load unpacked)
-
-Extension này chưa đăng trên Chrome Web Store, cài theo dạng "Load unpacked":
 
 1. Tải/clone repo này về máy.
 2. Mở Chrome, vào địa chỉ `chrome://extensions`.
@@ -37,19 +33,10 @@ Extension này chưa đăng trên Chrome Web Store, cài theo dạng "Load unpac
 
 Nếu popup báo "Chưa có API key", hoặc trong panel transcript hiện banner nhắc nhở — quay lại bước [Cấu hình API key](#cấu-hình-api-key-miễn-phí) ở trên.
 
-## Cách hoạt động (kỹ thuật)
-
-- **Content script** (`src/content/content.js`) chờ panel transcript của Coursera mount (`div.rc-Transcript`), thu thập toàn bộ câu (`span.rc-Phrase[data-cue]`), gửi sang background để dịch, rồi chèn thêm `<span class="ct-vi-line">` chứa bản dịch làm con của mỗi câu — không đụng tới DOM gốc nên các tương tác có sẵn của Coursera vẫn hoạt động bình thường.
-- **Đồng bộ highlight** không cần thêm JavaScript: Coursera tự gắn thuộc tính `data-active="true"` lên câu đang được đọc, extension chỉ cần CSS `[data-active="true"]` để tự động bắt theo — chính xác tuyệt đối theo cơ chế gốc.
-- **Background service worker** (`src/background/background.js`) gọi Gemini API với toàn bộ transcript trong một request (giữ ngữ cảnh để dịch mạch lạc, kể cả khi Coursera cắt câu ở giữa), dùng `responseSchema` để ép kết quả trả về đúng định dạng JSON khớp số lượng câu.
-- **Popup** (`src/popup/popup.html`) là nơi duy nhất để nhập/xem API key, không mở tab riêng.
-- Theo dõi điều hướng SPA của Coursera bằng cách poll `location.href`, tự chạy lại toàn bộ luồng khi chuyển sang bài giảng khác.
-
 ## Giới hạn / lưu ý
 
 - Cần API key Gemini hợp lệ; gói miễn phí có giới hạn số request/phút — nếu dịch lỗi, panel sẽ báo và có nút thử lại.
 - Chỉ hoạt động trên các trang bài giảng dạng `coursera.org/learn/*/lecture/*` có transcript.
-- Bản dịch được cache theo từng bài giảng trong `chrome.storage.local`; xoá cache bằng cách gỡ và cài lại extension, hoặc xoá dữ liệu extension trong `chrome://extensions`.
 
 ## Thư mục dự án
 
