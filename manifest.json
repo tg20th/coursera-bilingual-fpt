@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Coursera Bilingual Transcript",
+  "version": "0.1.0",
+  "description": "Hien thi transcript song ngu Anh-Viet ngay trong panel transcript cua Coursera, tu dong highlight theo tien trinh video.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://www.coursera.org/*",
+    "https://generativelanguage.googleapis.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background/background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.coursera.org/learn/*/lecture/*"],
+      "js": ["src/content/content.js"],
+      "css": ["src/content/styles.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "Coursera Bilingual Transcript - Cai dat"
+  }
+}

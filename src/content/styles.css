@@ -1,0 +1,31 @@
+.ct-vi-line {
+  display: block;
+  font-size: 0.82em;
+  line-height: 1.35;
+  opacity: 0.78;
+  margin-top: 2px;
+  margin-bottom: 6px;
+  color: inherit;
+}
+
+.rc-Phrase[data-active='true'] {
+  background-color: rgba(255, 196, 0, 0.28);
+  border-radius: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.rc-Phrase[data-active='true'] .ct-vi-line {
+  font-weight: 600;
+  opacity: 1;
+}
+
+.ct-banner {
+  font-size: 13px;
+  padding: 8px 12px;
+  margin: 8px 16px;
+  border-radius: 6px;
+  background: #eef2ff;
+  color: #1a1a2e;
+  border: 1px solid #c7d2fe;
+}
