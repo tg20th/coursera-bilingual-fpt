@@ -1,7 +1,4 @@
-const DEFAULT_MODEL = 'gemini-2.5-flash';
-
 const apiKeyInput = document.getElementById('apiKey');
-const modelInput = document.getElementById('model');
 const toggleBtn = document.getElementById('toggleKey');
 const saveBtn = document.getElementById('save');
 const statusMsg = document.getElementById('statusMsg');
@@ -22,7 +19,6 @@ function updateStatus(hasKey) {
 async function load() {
   const { settings } = await chrome.storage.local.get('settings');
   apiKeyInput.value = settings?.geminiApiKey || '';
-  modelInput.value = settings?.geminiModel || DEFAULT_MODEL;
   updateStatus(Boolean(settings?.geminiApiKey));
 }
 
@@ -34,8 +30,7 @@ toggleBtn.addEventListener('click', () => {
 
 saveBtn.addEventListener('click', async () => {
   const geminiApiKey = apiKeyInput.value.trim();
-  const geminiModel = modelInput.value.trim() || DEFAULT_MODEL;
-  await chrome.storage.local.set({ settings: { geminiApiKey, geminiModel } });
+  await chrome.storage.local.set({ settings: { geminiApiKey } });
   updateStatus(Boolean(geminiApiKey));
   statusMsg.textContent = 'Đã lưu!';
   setTimeout(() => {

@@ -21,7 +21,7 @@ Chrome extension hiển thị **transcript song ngữ Anh-Việt** ngay trong pa
 
 1. Lấy Gemini API key miễn phí tại **[Google AI Studio](https://aistudio.google.com/apikey)** (đăng nhập bằng tài khoản Google, bấm "Create API key").
 2. Bấm vào **icon extension** trên thanh công cụ Chrome để mở popup cài đặt.
-3. Dán API key vào ô **Gemini API key**, có thể tuỳ chỉnh **Model** (mặc định `gemini-2.5-flash`).
+3. Dán API key vào ô **Gemini API key** (model dịch dùng cố định `gemini-3.6-flash`, không cần chỉnh).
 4. Bấm **Lưu cài đặt**. Popup sẽ hiện trạng thái "Đã cấu hình API key".
 
 ## Cách dùng

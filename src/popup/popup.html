@@ -5,195 +5,218 @@
 <title>Coursera Bilingual Transcript</title>
 <style>
   :root {
-    --brand: #2050ff;
-    --brand-dark: #173bcf;
-    --bg: #f7f8fc;
-    --card: #ffffff;
-    --text: #1a1a2e;
-    --muted: #6b7280;
-    --border: #e3e6ef;
-    --ok: #17a35a;
-    --warn: #d97706;
+    --primary: #0066cc;
+    --primary-focus: #0071e3;
+    --ink: #1d1d1f;
+    --ink-muted-48: #7a7a7a;
+    --hairline: rgba(0, 0, 0, 0.08);
+    --canvas: #ffffff;
+    --canvas-parchment: #f5f5f7;
+    --on-primary: #ffffff;
+    --success: #34c759;
+    --warning: #ff9500;
+    --radius-sm: 8px;
+    --radius-lg: 20px;
+    --radius-pill: 9999px;
   }
   * { box-sizing: border-box; }
+  html {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  html, body { margin: 0; }
   body {
-    width: 340px;
-    margin: 0;
-    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    width: 336px;
+    background: var(--canvas);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    padding: 22px 22px 0;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+      system-ui, "Segoe UI", sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
   }
-  header {
-    background: linear-gradient(135deg, var(--brand), #6a8bff);
-    color: #fff;
-    padding: 16px 18px;
-  }
-  header .logo-row {
+
+  .brand {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    margin-bottom: 18px;
   }
-  header .logo {
-    font-size: 20px;
-  }
-  header h1 {
+  .brand .mark {
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-sm);
+    background: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 15px;
-    margin: 0;
-    font-weight: 700;
-  }
-  header p {
-    margin: 4px 0 0;
-    font-size: 12px;
-    opacity: 0.9;
-  }
-  main {
-    padding: 16px 18px 8px;
-  }
-  .status {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    color: var(--muted);
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 8px 10px;
-    margin-bottom: 16px;
-  }
-  .status .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--muted);
     flex-shrink: 0;
   }
-  .status.ok .dot { background: var(--ok); }
-  .status.ok { color: var(--ok); }
-  .status.warn .dot { background: var(--warn); }
-  .status.warn { color: var(--warn); }
-
-  label {
-    display: block;
+  .brand h1 {
+    margin: 0;
+    font-size: 17px;
     font-weight: 600;
-    font-size: 12.5px;
-    margin-bottom: 6px;
-    color: var(--text);
+    letter-spacing: -0.374px;
   }
-  .field {
-    margin-bottom: 14px;
-  }
-  .row {
-    display: flex;
+
+  .status {
+    display: inline-flex;
+    align-items: center;
     gap: 6px;
-  }
-  input[type="password"],
-  input[type="text"] {
-    flex: 1;
-    width: 100%;
-    padding: 9px 10px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
     font-size: 13px;
-    background: var(--card);
-    color: var(--text);
+    letter-spacing: -0.224px;
+    color: var(--ink-muted-48);
+    background: var(--canvas-parchment);
+    border-radius: var(--radius-pill);
+    padding: 5px 12px;
+    margin-bottom: 20px;
   }
-  input:focus {
-    outline: none;
-    border-color: var(--brand);
-    box-shadow: 0 0 0 3px rgba(32, 80, 255, 0.12);
+  .status .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ink-muted-48);
+    flex-shrink: 0;
   }
-  button.ghost {
-    padding: 0 12px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--card);
-    cursor: pointer;
-    font-size: 12px;
-    color: var(--muted);
-  }
-  button.ghost:hover { background: #f0f2fb; }
+  .status.ok { color: var(--success); }
+  .status.ok .dot { background: var(--success); }
+  .status.warn { color: var(--warning); }
+  .status.warn .dot { background: var(--warning); }
 
-  .hint-link {
+  .field { margin-bottom: 6px; }
+  .field label {
     display: block;
-    font-size: 11.5px;
-    color: var(--muted);
-    margin-top: -6px;
-    margin-bottom: 14px;
-  }
-  .hint-link a { color: var(--brand); text-decoration: none; }
-  .hint-link a:hover { text-decoration: underline; }
-
-  button.primary {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    background: var(--brand);
-    color: #fff;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s ease;
+    letter-spacing: -0.224px;
+    margin-bottom: 8px;
   }
-  button.primary:hover { background: var(--brand-dark); }
-  button.primary:active { transform: translateY(1px); }
+
+  .input-pill {
+    display: flex;
+    align-items: center;
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-pill);
+    height: 44px;
+    padding: 0 6px 0 20px;
+  }
+  .input-pill input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 15px;
+    letter-spacing: -0.24px;
+    color: var(--ink);
+  }
+  .input-pill input::placeholder { color: var(--ink-muted-48); }
+  .input-pill:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.14);
+  }
+
+  .icon-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: var(--ink-muted-48);
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .icon-btn:hover { background: var(--canvas-parchment); }
+  .icon-btn:active { transform: scale(0.9); }
+
+  .hint {
+    display: block;
+    font-size: 12px;
+    letter-spacing: -0.12px;
+    color: var(--ink-muted-48);
+    margin: 8px 0 20px 20px;
+  }
+  .hint a { color: var(--primary); text-decoration: none; }
+  .hint a:hover { text-decoration: underline; }
+
+  .btn-primary {
+    width: 100%;
+    height: 44px;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: var(--primary);
+    color: var(--on-primary);
+    font-family: inherit;
+    font-size: 15px;
+    letter-spacing: -0.24px;
+    cursor: pointer;
+  }
+  .btn-primary:active { transform: scale(0.96); }
+  .btn-primary:focus-visible {
+    outline: 2px solid var(--primary-focus);
+    outline-offset: 2px;
+  }
 
   #statusMsg {
     text-align: center;
     font-size: 12px;
-    color: var(--ok);
+    color: var(--success);
     height: 16px;
-    margin-top: 8px;
+    margin-top: 10px;
   }
 
   footer {
     text-align: center;
-    padding: 12px 0 14px;
+    padding: 14px 0 18px;
     font-size: 11px;
-    color: var(--muted);
-    border-top: 1px solid var(--border);
-    margin-top: 8px;
+    letter-spacing: -0.08px;
+    line-height: 1.7;
+    color: var(--ink-muted-48);
   }
+  footer a { color: var(--primary); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
-  <header>
-    <div class="logo-row">
-      <span class="logo">🌐</span>
-      <h1>Coursera Bilingual Transcript</h1>
+  <div class="brand">
+    <span class="mark">🌐</span>
+    <h1>Coursera Bilingual Transcript</h1>
+  </div>
+
+  <div class="status" id="status">
+    <span class="dot"></span>
+    <span id="statusText">Đang kiểm tra...</span>
+  </div>
+
+  <div class="field">
+    <label for="apiKey">Gemini API key</label>
+    <div class="input-pill">
+      <input type="password" id="apiKey" placeholder="AIza..." autocomplete="off" />
+      <button class="icon-btn" id="toggleKey" type="button" aria-label="Hiện hoặc ẩn API key">👁</button>
     </div>
-    <p>Transcript song ngữ Anh-Việt, tự highlight theo lời giảng</p>
-  </header>
+  </div>
+  <span class="hint">
+    Lấy miễn phí tại
+    <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Google AI Studio</a>
+  </span>
 
-  <main>
-    <div class="status" id="status">
-      <span class="dot"></span>
-      <span id="statusText">Đang kiểm tra...</span>
-    </div>
+  <button class="btn-primary" id="save" type="button">Lưu cài đặt</button>
+  <div id="statusMsg"></div>
 
-    <div class="field">
-      <label for="apiKey">Gemini API key</label>
-      <div class="row">
-        <input type="password" id="apiKey" placeholder="AIza..." autocomplete="off" />
-        <button class="ghost" id="toggleKey" type="button">Hiện</button>
-      </div>
-    </div>
-    <span class="hint-link">
-      Lấy API key miễn phí tại
-      <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Google AI Studio</a>
-    </span>
-
-    <div class="field">
-      <label for="model">Model</label>
-      <input type="text" id="model" placeholder="gemini-2.5-flash" />
-    </div>
-
-    <button class="primary" id="save" type="button">Lưu cài đặt</button>
-    <div id="statusMsg"></div>
-  </main>
-
-  <footer>© VibeCode by NhatTruong</footer>
+  <footer>
+    <a href="https://github.com/tg20th/coursera-bilingual-fpt" target="_blank" rel="noopener"
+      >github.com/tg20th/coursera-bilingual-fpt</a
+    ><br />
+    © VibeCode by NhatTruong
+  </footer>
 
   <script src="popup.js"></script>
 </body>

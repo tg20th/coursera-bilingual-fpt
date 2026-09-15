@@ -1,4 +1,4 @@
-const DEFAULT_MODEL = 'gemini-2.5-flash';
+const MODEL = 'gemini-3.6-flash';
 const API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
 
 async function getSettings() {
@@ -22,8 +22,7 @@ ${numbered}`;
 }
 
 async function callGemini(phrases, settings) {
-  const model = settings.geminiModel || DEFAULT_MODEL;
-  const url = `${API_BASE}/${model}:generateContent?key=${encodeURIComponent(settings.geminiApiKey)}`;
+  const url = `${API_BASE}/${MODEL}:generateContent?key=${encodeURIComponent(settings.geminiApiKey)}`;
   const body = {
     contents: [{ parts: [{ text: buildPrompt(phrases) }] }],
     generationConfig: {
@@ -83,5 +82,4 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     })();
     return true;
   }
-
 });
