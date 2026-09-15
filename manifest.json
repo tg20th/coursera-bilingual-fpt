@@ -21,7 +21,6 @@
     }
   ],
   "action": {
-    "default_popup": "src/popup/popup.html",
     "default_title": "Coursera Bilingual Transcript - Cai dat"
   }
 }

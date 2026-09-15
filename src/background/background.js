@@ -83,3 +83,52 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     return true;
   }
 });
+
+const POPUP_WIDTH = 360;
+const POPUP_HEIGHT = 460;
+const POPUP_MARGIN = 16;
+let popupWindowId = null;
+
+async function openPopupWindow() {
+  if (popupWindowId !== null) {
+    try {
+      await chrome.windows.update(popupWindowId, { focused: true });
+      return;
+    } catch (err) {
+      popupWindowId = null;
+    }
+  }
+
+  let left = 100;
+  let top = 100;
+  try {
+    const current = await chrome.windows.getCurrent();
+    const winLeft = current.left ?? 0;
+    const winTop = current.top ?? 0;
+    const winWidth = current.width ?? 1280;
+    const winHeight = current.height ?? 800;
+    left = Math.max(0, Math.round(winLeft + winWidth - POPUP_WIDTH - POPUP_MARGIN));
+    top = Math.max(0, Math.round(winTop + winHeight - POPUP_HEIGHT - POPUP_MARGIN));
+  } catch (err) {
+    // giu vi tri mac dinh neu khong lay duoc kich thuoc cua so hien tai
+  }
+
+  const created = await chrome.windows.create({
+    url: chrome.runtime.getURL('src/popup/popup.html'),
+    type: 'popup',
+    width: POPUP_WIDTH,
+    height: POPUP_HEIGHT,
+    left,
+    top,
+    focused: true,
+  });
+  popupWindowId = created.id;
+}
+
+chrome.windows.onRemoved.addListener((id) => {
+  if (id === popupWindowId) popupWindowId = null;
+});
+
+chrome.action.onClicked.addListener(() => {
+  openPopupWindow();
+});
